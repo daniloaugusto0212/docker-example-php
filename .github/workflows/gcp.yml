@@ -2,14 +2,14 @@ name: GCP
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   deploy:
     name: Gcloud Auto Deploy
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/celso-ireno:1.0
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/first-docker:1.0
     steps:
       # Git checkout
       - name: Checkout
@@ -35,4 +35,4 @@ jobs:
 
       # deploy image
       - name: Deploy Docker image
-        run: gcloud run deploy celso-ireno --image $IMAGE_NAME --project ${{ secrets.GCP_PROJECT_ID }} --platform managed --port 80 --region us-central1 --allow-unauthenticated
+        run: gcloud run deploy first-docker --image $IMAGE_NAME --project ${{ secrets.GCP_PROJECT_ID }} --platform managed --port 80 --region us-central1 --allow-unauthenticated
